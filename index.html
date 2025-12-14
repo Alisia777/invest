@@ -96,7 +96,7 @@
       border-radius: 12px;
       cursor:pointer;
       box-shadow: 0 10px 30px rgba(0,0,0,.22);
-      transition: transform .12s ease, border-color .12s ease;
+
       user-select:none;
     }
     .btn:hover{transform: translateY(-1px); border-color: rgba(215,179,90,.42)}
@@ -122,21 +122,22 @@
       width:100%;
       height:100%;
       min-height:0;
-      display:flex;
-      gap:0;
-      transition: transform .45s cubic-bezier(.2,.8,.2,1);
-      will-change: transform;
+      position:relative;
+      display:block;
     }
 
     section.slide{
-      min-width:100%;
-      height:100%;
+      position:absolute;
+      inset:0;
       padding: 10px;
-      display:flex;
+      display:none;
       align-items:stretch;
       justify-content:center;
-  min-height: 0;
-}
+      min-height:0;
+    }
+    section.slide.is-active{
+      display:flex;
+    }
 
     .frame{
       width:min(1200px, 100%);
@@ -285,7 +286,7 @@
       background: rgba(215,179,90,.10);
       cursor:pointer;
       opacity:.75;
-      transition: transform .12s ease, opacity .12s ease, background .12s ease;
+
     }
     .nav button.active{
       opacity: 1;
@@ -320,16 +321,19 @@
 
     /* Watermark */
     .wm{
-      position:absolute;
+      position:fixed;
       right: 18px;
       bottom: 16px;
       opacity: .22;
-      display:flex; align-items:center; gap:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-weight: 800;
       letter-spacing: .8px;
       color: rgba(215,179,90,.9);
       user-select:none;
       pointer-events:none;
+      z-index: 30;
     }
     .wm small{font-weight:700; color: rgba(232,236,243,.65); letter-spacing: .2px}
 
@@ -362,7 +366,7 @@
       overflow:hidden;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.18);
-      transition: transform .12s ease, border-color .12s ease;
+
     }
     .imggrid a:hover{transform: translateY(-1px); border-color: rgba(215,179,90,.35);}
     .imggrid img{
@@ -418,12 +422,7 @@
                 </div>
               </div>
             </div>
-
-            <div class="wm">
-              <span>🦊 SUNFOX</span>
-              <small>Сергей Артюхин</small>
-            </div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 2 -->
@@ -489,8 +488,7 @@
                 </p>
               </div>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 3 -->
@@ -566,8 +564,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 4 -->
@@ -610,8 +607,7 @@
                 <p contenteditable="true" style="margin-top:10px">Сейчас цифры маленькие (старт), но выкуп 100% — хороший сигнал качества/ожиданий.</p>
               </div>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 5 -->
@@ -653,8 +649,7 @@
                 </div>
               </div>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 6 -->
@@ -699,8 +694,7 @@
                 </p>
               </div>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 7 -->
@@ -754,8 +748,7 @@
                 </table>
               </div>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 8 -->
@@ -816,8 +809,7 @@
                 </div>
               </div>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 9 -->
@@ -855,8 +847,7 @@
                   <div class="card dark"><div class="metric"><div class="label">Наличие</div><div class="value" contenteditable="true">45–60 дней</div></div></div>
                 </div>
               </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
         <!-- SLIDE 10 -->
@@ -887,8 +878,7 @@
                 </p>
               </div>
             </div>
-            <div class="wm"><span>🦊 SUNFOX</span><small>Сергей Артюхин</small></div>
-          </div>
+</div>
         </section>
 
 
@@ -900,71 +890,87 @@
         <button class="btn" id="next">→</button>
       </div>
     
-window.addEventListener('DOMContentLoaded', () => {
-    const slides = document.getElementById('slides');
+
+<script>
+(function(){
+  function ready(fn){
+    if(document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn);
+  }
+  ready(function(){
+    const slidesWrap = document.getElementById('slides');
     const sections = Array.from(document.querySelectorAll('section.slide'));
     const nav = document.getElementById('nav');
     const count = document.getElementById('count');
     const prev = document.getElementById('prev');
     const next = document.getElementById('next');
 
+    if(!slidesWrap || !sections.length) return;
+
     let i = 0;
+    function clamp(n){ return (n + sections.length) % sections.length; }
 
     function renderNav(){
+      if(!nav) return;
       nav.innerHTML = '';
       sections.forEach((_, idx)=>{
         const b = document.createElement('button');
+        b.type = 'button';
         b.title = `Слайд ${idx+1}`;
-        if(idx===i) b.classList.add('active');
-        b.addEventListener('click', ()=>go(idx));
+        b.className = (idx===i) ? 'active' : '';
+        b.addEventListener('click', (e)=>{ e.preventDefault(); go(idx); });
         nav.appendChild(b);
-      })
-      count.textContent = `${i+1} / ${sections.length}`;
+      });
+    }
+
+    function update(){
+      sections.forEach((s, idx)=> s.classList.toggle('is-active', idx===i));
+      if(count) count.textContent = `${i+1} / ${sections.length}`;
+      // update dots
+      if(nav){
+        Array.from(nav.children).forEach((b, idx)=> b.classList.toggle('active', idx===i));
+      }
     }
 
     function go(idx){
-      i = Math.max(0, Math.min(sections.length-1, idx));
-      slides.style.transform = `translateX(${-i*100}%)`;
-      renderNav();
+      i = clamp(idx);
+      update();
     }
-
     function nextSlide(){ go(i+1); }
     function prevSlide(){ go(i-1); }
 
-    next.addEventListener('click', nextSlide);
-    prev.addEventListener('click', prevSlide);
-
-    // Wheel = slide
-    let wheelLock = false;
-    window.addEventListener('wheel', (e)=>{
-      if (window.matchMedia('(max-width: 980px)').matches) return;
-      if(wheelLock) return;
-      wheelLock = true;
-      setTimeout(()=>wheelLock=false, 300);
-      if(e.deltaY>0) nextSlide(); else prevSlide();
-    }, {passive:true});
+    // Buttons
+    if(prev) prev.addEventListener('click', (e)=>{ e.preventDefault(); prevSlide(); });
+    if(next) next.addEventListener('click', (e)=>{ e.preventDefault(); nextSlide(); });
 
     // Keyboard
     window.addEventListener('keydown', (e)=>{
-      if (window.matchMedia('(max-width: 980px)').matches) return;
-      if(e.key==='ArrowRight' || e.key===' '){ e.preventDefault(); nextSlide(); }
-      if(e.key==='ArrowLeft'){ prevSlide(); }
+      if(e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); nextSlide(); }
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); prevSlide(); }
     });
 
-    
-    // Mobile: tap left/right to navigate (ignore UI clicks)
+    // Wheel (throttled)
+    let wheelLock = false;
+    window.addEventListener('wheel', (e)=>{
+      if(wheelLock) return;
+      wheelLock = true;
+      setTimeout(()=>wheelLock=false, 220);
+      if(Math.abs(e.deltaY) < 4 && Math.abs(e.deltaX) < 4) return;
+      const d = (Math.abs(e.deltaX) > Math.abs(e.deltaY)) ? e.deltaX : e.deltaY;
+      if(d > 0) nextSlide(); else prevSlide();
+    }, {passive:true});
+
+    // Mobile tap edges + swipe
     const interactiveSel = 'button, a, input, textarea, [contenteditable="true"], .nav button';
     document.addEventListener('click', (e)=>{
       if(e.target && e.target.closest(interactiveSel)) return;
-      const x = (e.clientX ?? 0);
       const w = window.innerWidth || 1;
-      if (w < 980){
-        if (x > w*0.66) nextSlide();
-        else if (x < w*0.34) prevSlide();
-      }
+      if(w >= 980) return;
+      const x = e.clientX ?? 0;
+      if(x > w*0.66) nextSlide();
+      else if(x < w*0.34) prevSlide();
     });
 
-    // Mobile: swipe
     let touchX = null;
     window.addEventListener('touchstart', (e)=>{
       if(!e.touches || !e.touches.length) return;
@@ -975,32 +981,18 @@ window.addEventListener('DOMContentLoaded', () => {
       const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : touchX;
       const dx = endX - touchX;
       touchX = null;
-      const threshold = 45;
-      if (Math.abs(dx) < threshold) return;
-      if (dx < 0) nextSlide(); else prevSlide();
+      if(Math.abs(dx) < 45) return;
+      if(dx < 0) nextSlide(); else prevSlide();
     }, {passive:true});
-// Print
-    document.getElementById('btnPrint').addEventListener('click', ()=>window.print());
-    // Copy teaser
-    document.getElementById('btnCopy').addEventListener('click', async ()=>{
-      const teaser =
-`Давид, привет. Мы запустили BLACK TIGER AUDIO (автозвук) на WB/Ozon. Сейчас 2 SKU усилителей (Storm/Gale), стадия — набор отзывов + докрутка экономики/рекламы. Факт: WB (26.11–13.12) — 11 шт / 34 652 ₽ (Storm 10, Gale 1). Ozon (7–13.12) — 3 заказа / 3 выкупа на 19 599 ₽. Тест РК Ozon (8–14.12): расход 2 263,54 ₽, продажи 5 700 ₽, CTR 3,30%, CPC 3,3 ₽. Следующий шаг — партия товара + разгон и вывод новинок (провода/саб/5‑канальник/колонки). Нужна инвестиция ~2,5 млн ₽. Давай созвон на 30 минут — покажем кабинеты/юнитку/план.`;
-      try{
-        await navigator.clipboard.writeText(teaser);
-        alert('Тизер скопирован в буфер обмена ✅');
-      }catch(err){
-        prompt('Скопируй вручную:', teaser);
-      }
-    });
 
-renderNav();
+    // Initial
+    renderNav();
     go(0);
-  
-});
+  });
+})();
+</script>
 
 
-renderNav();
-    go(0);
-  </script>
+  <div class="wm"><span>🦊 SUNFOX</span></div>
 </body>
 </html>
