@@ -18,3 +18,6 @@
 
 
 > FIX2: layout switched to flex (robust for Pages).
+
+
+> FIX4: screenshots embedded on slides 3 & 6; contacts block removed.
