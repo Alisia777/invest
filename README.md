@@ -15,3 +15,6 @@
 
 ## Экспорт в PDF
 Открой сайт → кнопка **PDF** (вверху) → “Сохранить как PDF”.
+
+
+> FIX: CSS patched for GitHub Pages viewport height.
