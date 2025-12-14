@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BLACK TIGER AUDIO — One‑pager (Investor)</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --panel:#0f1623;
+      --card:#111b2c;
+      --card2:#0f1828;
+      --text:#e8ecf3;
+      --muted:#a3adba;
+      --gold:#d7b35a;
+      --gold2:#b89439;
+      --line:rgba(215,179,90,.20);
+      --ok:#4ade80;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background:
+        radial-gradient(1200px 800px at 15% 15%, rgba(215,179,90,.10), transparent 60%),
+        radial-gradient(900px 600px at 85% 30%, rgba(255,255,255,.06), transparent 55%),
+        linear-gradient(180deg, #070a10 0%, var(--bg) 100%);
+      color:var(--text);
+      overflow:hidden;
+    }
+
+    /* Layout */
+    .app{
+      height:100%;
+      display:grid;
+      grid-template-rows: 64px 1fr;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding: 14px 18px;
+      border-bottom:1px solid rgba(215,179,90,.18);
+      background: linear-gradient(180deg, rgba(17,27,44,.85), rgba(17,27,44,.35));
+      backdrop-filter: blur(8px);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 280px;
+    }
+    .brand .name{
+      font-weight: 800;
+      letter-spacing:.5px;
+      line-height:1.05;
+    }
+    .brand .sub{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+    .pill{
+      margin-left:auto;
+      display:flex; gap:10px; align-items:center;
+      color:var(--muted); font-size:12px;
+    }
+    .pill b{color:var(--text)}
+    .btn{
+      appearance:none;
+      border:1px solid rgba(215,179,90,.28);
+      background: linear-gradient(180deg, rgba(215,179,90,.18), rgba(215,179,90,.06));
+      color:var(--text);
+      padding:10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+      transition: transform .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(215,179,90,.42)}
+    .btn:active{transform: translateY(0px)}
+    .btn.secondary{
+      border-color: rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+    }
+
+    /* Slides */
+    .deck{
+      position:relative;
+      height:100%;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      padding: 18px;
+    }
+
+    .slides{
+      width:min(1200px, 100%);
+      height:100%;
+      display:flex;
+      transition: transform .35s ease;
+      will-change: transform;
+    }
+
+    section.slide{
+      min-width:100%;
+      height:100%;
+      padding: 10px;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+    }
+
+    .frame{
+      width:100%;
+      height:100%;
+      border-radius: var(--radius);
+      border:1px solid rgba(215,179,90,.16);
+      background: linear-gradient(180deg, rgba(17,27,44,.58), rgba(15,22,35,.40));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .content{
+      padding: 34px 34px 26px 34px;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .kicker{
+      color: rgba(215,179,90,.9);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    h1{
+      margin:0;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: .2px;
+    }
+    h2{
+      margin:0;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+    p{margin:0; color: var(--muted); font-size: 15px; line-height: 1.55}
+    .row{display:grid; gap:14px}
+    .row.two{grid-template-columns: 1.05fr .95fr}
+    .row.three{grid-template-columns: 1fr 1fr 1fr}
+    .row.four{grid-template-columns: 1fr 1fr 1fr 1fr}
+    @media (max-width: 980px){
+      .row.two,.row.three,.row.four{grid-template-columns: 1fr}
+      h1{font-size: 34px}
+      .content{padding: 22px}
+      header .brand{min-width:unset}
+      body{overflow:auto}
+      .app{grid-template-rows:auto 1fr}
+      .deck{overflow:auto}
+      .slides{flex-direction:column; transform:none!important}
+      section.slide{min-width:auto; height:auto}
+      body{overflow:auto}
+    }
+
+    .card{
+      border:1px solid rgba(215,179,90,.14);
+      background: linear-gradient(180deg, rgba(17,27,44,.72), rgba(15,24,40,.50));
+      border-radius: 16px;
+      padding: 16px 16px;
+    }
+    .card.dark{
+      background: linear-gradient(180deg, rgba(10,14,22,.58), rgba(10,14,22,.28));
+      border-color: rgba(255,255,255,.10);
+    }
+    .metric{
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .metric .label{color:var(--muted); font-size:12px}
+    .metric .value{font-size:22px; font-weight:800}
+    .metric .delta{font-size:12px; color:rgba(232,236,243,.85)}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(215,179,90,.20);
+      background: rgba(215,179,90,.08);
+      color: rgba(232,236,243,.92);
+      font-size:12px;
+      width: fit-content;
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      color: var(--muted);
+      line-height:1.45;
+      font-size:14px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      margin-top: 6px;
+      background: rgba(215,179,90,.9);
+      box-shadow: 0 0 0 4px rgba(215,179,90,.16);
+      flex:0 0 auto;
+    }
+    .li b{color:var(--text)}
+
+    .table{
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .table th, .table td{
+      padding: 10px 12px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-size: 13px;
+    }
+    .table th{
+      text-align:left;
+      color: rgba(215,179,90,.92);
+      font-weight: 700;
+      background: rgba(0,0,0,.18);
+    }
+    .table td{color: var(--muted)}
+    .table tr:last-child td{border-bottom:none}
+
+    /* Right nav dots */
+    .nav{
+      position:absolute;
+      right: 14px;
+      top: 86px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      z-index: 20;
+    }
+    .nav button{
+      width:10px; height:10px;
+      border-radius:999px;
+      border:1px solid rgba(215,179,90,.35);
+      background: rgba(215,179,90,.10);
+      cursor:pointer;
+      opacity:.75;
+      transition: transform .12s ease, opacity .12s ease, background .12s ease;
+    }
+    .nav button.active{
+      opacity: 1;
+      transform: scale(1.25);
+      background: rgba(215,179,90,.42);
+    }
+
+    /* Footer controls */
+    .controls{
+      position:absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      z-index: 20;
+      pointer-events:none;
+    }
+    .controls > *{pointer-events:auto}
+    .counter{
+      font-size: 12px;
+      color: var(--muted);
+      display:flex; gap:8px; align-items:center;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+    }
+
+    /* Watermark */
+    .wm{
+      position:absolute;
+      right: 18px;
+      bottom: 16px;
+      opacity: .22;
+      display:flex; align-items:center; gap:10px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      color: rgba(215,179,90,.9);
+      user-select:none;
+      pointer-events:none;
+    }
+    .wm small{font-weight:700; color: rgba(232,236,243,.65); letter-spacing: .2px}
+
+    /* Print */
+    @media print{
+      body{overflow:visible; background:#fff; color:#111}
+      header,.nav,.controls{display:none!important}
+      .app{display:block}
+      .deck{padding:0}
+      .slides{display:block; width:100%}
+      section.slide{page-break-after:always; height:auto}
+      .frame{box-shadow:none; border:1px solid #ddd; background:#fff}
+      .wm{opacity:.12}
+      p,.li,.table td{color:#333}
+      .kicker,.table th{color:#7a5b1a}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <!-- Replace this SVG with your real fox logo if you want -->
+        <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true">
+          <path fill="rgba(215,179,90,.22)" d="M9 21l9-11 10 10 4 8-6 6-11-13-6 0z"/>
+          <path fill="rgba(215,179,90,.22)" d="M55 21l-9-11-10 10-4 8 6 6 11-13 6 0z"/>
+          <path fill="rgba(215,179,90,.82)" d="M32 12c-9 0-17 9-17 20 0 14 10 22 17 22s17-8 17-22c0-11-8-20-17-20zm0 9c4 0 7 3 7 7 0 2-1 4-2 5 2 1 3 3 3 5 0 4-4 7-8 7s-8-3-8-7c0-2 1-4 3-5-1-1-2-3-2-5 0-4 3-7 7-7z"/>
+          <circle cx="26" cy="30" r="2" fill="#0b0f14"/>
+          <circle cx="38" cy="30" r="2" fill="#0b0f14"/>
+          <path d="M32 34c-3 0-4 2-4 3 0 3 2 5 4 5s4-2 4-5c0-1-1-3-4-3z" fill="#0b0f14"/>
+        </svg>
+        <div>
+          <div class="name">BLACK TIGER AUDIO</div>
+          <div class="sub">Investor one‑pager • WB + Ozon • стадия: набор отзывов</div>
+        </div>
+      </div>
+
+      <div class="pill">
+        <span>Обновление: <b contenteditable="true">14.12.2025</b></span>
+        <button class="btn secondary" id="btnPrint" title="Сохранить как PDF через печать браузера">PDF</button>
+        <button class="btn" id="btnCopy" title="Скопировать тезисы для Telegram">Скопировать тизер</button>
+      </div>
+    </header>
+
+    <div class="deck">
+      <div class="nav" id="nav"></div>
+
+      <div class="slides" id="slides">
+
+        <!-- SLIDE 1 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">КТО МЫ / ЧТО СТРОИМ</div>
+              <h1>Быстрый запуск линейки автозвука<br/>на маркетплейсах — с системной экономикой</h1>
+              <p contenteditable="true">
+                BLACK TIGER AUDIO — собственный бренд автозвука на WB + Ozon. Сейчас 2 SKU усилителей (Storm/Gale), стадия — набор отзывов и отстройка рекламы.
+                Дальше расширяем линейку: саб, провода, 5‑канальник, колонки.
+              </p>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="tag">🎯 Цель 60–90 дней</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span><b>30–50 отзывов</b> на SKU → рост конверсии</span></div>
+                    <div class="li"><span class="dot"></span><span>Снижение <b>DRR до 12–15%</b> после базы</span></div>
+                    <div class="li"><span class="dot"></span><span>Наличие 45–60 дней, без <b>out‑of‑stock</b></span></div>
+                    <div class="li"><span class="dot"></span><span>Подключение <b>новых SKU</b> (апсейл/средний чек)</span></div>
+                  </div>
+                </div>
+
+                <div class="card dark">
+                  <div class="tag">⚡ Почему сейчас</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Ниша автозвука на МП: <b>спрос и тренд</b></span></div>
+                    <div class="li"><span class="dot"></span><span>Слабая “упаковка” у многих продавцов → можно <b>забирать конверсию</b></span></div>
+                    <div class="li"><span class="dot"></span><span>Мы управляем ростом через <b>цифры</b>: реклама/цены/остатки</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wm">
+              <span>🦊 SUNFOX</span>
+              <small>signature</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">ПРОДУКТЫ / ЦЕНЫ / СЕБЕСТОИМОСТЬ</div>
+              <h2>Текущая линейка (факт из кабинетов)</h2>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="tag">Storm 5800W • 4‑канальный</div>
+                  <div class="row two" style="margin-top:12px">
+                    <div class="metric">
+                      <div class="label">Себестоимость</div>
+                      <div class="value">2 900 ₽</div>
+                      <div class="delta">товарная себес</div>
+                    </div>
+                    <div class="metric">
+                      <div class="label">WB цена со скидкой</div>
+                      <div class="value">5 250 ₽</div>
+                      <div class="delta">WB Club: 4 725 ₽</div>
+                    </div>
+                  </div>
+
+                  <div class="card dark" style="margin-top:12px">
+                    <div class="metric">
+                      <div class="label">Ozon</div>
+                      <div class="delta">ваша цена: 5 387 ₽ • цена покупателя: 3 503 ₽</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="tag">Gale 3800W • 2‑канальный</div>
+                  <div class="row two" style="margin-top:12px">
+                    <div class="metric">
+                      <div class="label">Себестоимость</div>
+                      <div class="value">2 300 ₽</div>
+                      <div class="delta">товарная себес</div>
+                    </div>
+                    <div class="metric">
+                      <div class="label">WB цена со скидкой</div>
+                      <div class="value">4 400 ₽</div>
+                      <div class="delta">WB Club: 3 960 ₽</div>
+                    </div>
+                  </div>
+
+                  <div class="card dark" style="margin-top:12px">
+                    <div class="metric">
+                      <div class="label">Ozon</div>
+                      <div class="delta">цена: 4 100 ₽</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card dark">
+                <div class="tag">Примечание</div>
+                <p contenteditable="true" style="margin-top:10px">
+                  Сейчас стадия “набор отзывов” — допускаем нулевую/низкую прибыль ради органики.
+                  После базы отзывов корректируем цену/скидку и масштабируем рекламу только на прибыльных связках.
+                </p>
+              </div>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">TRACTION • WILDBERRIES</div>
+              <h2>Продажи по бренду (MPStats, 18 дней: 26.11–13.12)</h2>
+
+              <div class="row three">
+                <div class="card">
+                  <div class="metric">
+                    <div class="label">Storm — продажи</div>
+                    <div class="value">10 шт</div>
+                    <div class="delta">выручка: 31 968 ₽ • остаток: 12</div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="metric">
+                    <div class="label">Gale — продажи</div>
+                    <div class="value">1 шт</div>
+                    <div class="delta">выручка: 2 684 ₽ • остаток: 11</div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="metric">
+                    <div class="label">Итого</div>
+                    <div class="value">11 шт</div>
+                    <div class="delta">выручка: 34 652 ₽</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row two">
+                <div class="card dark">
+                  <div class="tag">Смысл этих цифр</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Мы уже в продажах, без базы отзывов — это стартовая точка.</span></div>
+                    <div class="li"><span class="dot"></span><span>Следующий рывок — отзывы + карточка + наличие по складам.</span></div>
+                    <div class="li"><span class="dot"></span><span>Storm продаётся лучше — на него делаем акцент в следующей партии.</span></div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="tag">Скриншоты / доказательства</div>
+                  <p contenteditable="true" style="margin-top:10px">
+                    Вставьте сюда ссылку на папку со скринами (WB/Ozon/MPStats) или замените блок картинками в GitHub.
+                  </p>
+                  <div class="card dark" style="margin-top:12px">
+                    <div class="metric">
+                      <div class="label">Ссылка</div>
+                      <div class="delta" contenteditable="true">https://…</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>SKU</th><th>Шт</th><th>Выручка</th><th>Остаток</th><th>Комментарий</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Storm 5800W</td><td>10</td><td>31 968 ₽</td><td>12</td><td contenteditable="true">Локомотив, усиливаем</td>
+                  </tr>
+                  <tr>
+                    <td>Gale 3800W</td><td>1</td><td>2 684 ₽</td><td>11</td><td contenteditable="true">Нужен отзыв/упаковка/позиционирование</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">TRACTION • OZON (воронка)</div>
+              <h2>Ozon (7–13 декабря): воронка и факт выкупа</h2>
+
+              <div class="row four">
+                <div class="card"><div class="metric"><div class="label">Показы всего</div><div class="value">28 217</div></div></div>
+                <div class="card"><div class="metric"><div class="label">Посещения карточки</div><div class="value">833</div></div></div>
+                <div class="card"><div class="metric"><div class="label">Добавления в корзину</div><div class="value">61</div></div></div>
+                <div class="card"><div class="metric"><div class="label">Заказано / Выкуплено</div><div class="value">3 / 3</div><div class="delta">100% выкуп</div></div></div>
+              </div>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="tag">Ключевые конверсии (по скрину)</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Поиск → карточка: <b>11,61%</b></span></div>
+                    <div class="li"><span class="dot"></span><span>Карточка → корзина: <b>7,32%</b></span></div>
+                    <div class="li"><span class="dot"></span><span>Корзина → заказ: <b>4,92%</b></span></div>
+                    <div class="li"><span class="dot"></span><span>Заказ → выкуп: <b>100%</b></span></div>
+                  </div>
+                </div>
+
+                <div class="card dark">
+                  <div class="tag">Что улучшаем</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Корзина → заказ (4,92%) растёт после отзывов и доверия.</span></div>
+                    <div class="li"><span class="dot"></span><span>Трафик уже есть — вопрос в <b>конверсии</b> и <b>цене/скидке</b>.</span></div>
+                    <div class="li"><span class="dot"></span><span>Ставим цель: +30–50% к заказам при том же трафике после базы.</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card dark">
+                <div class="tag">Заметка</div>
+                <p contenteditable="true" style="margin-top:10px">Сейчас цифры маленькие (старт), но выкуп 100% — хороший сигнал качества/ожиданий.</p>
+              </div>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">РЕКЛАМА • OZON (тест)</div>
+              <h2>Ozon, 8–14 декабря: тест РК (факт из аналитики продвижения)</h2>
+
+              <div class="row four">
+                <div class="card"><div class="metric"><div class="label">Расход</div><div class="value">2 263,54 ₽</div></div></div>
+                <div class="card"><div class="metric"><div class="label">Продажи (атриб.)</div><div class="value">5 700 ₽</div></div></div>
+                <div class="card"><div class="metric"><div class="label">CTR</div><div class="value">3,30%</div></div></div>
+                <div class="card"><div class="metric"><div class="label">CPC</div><div class="value">3,3 ₽</div></div></div>
+              </div>
+
+              <div class="row three">
+                <div class="card dark"><div class="metric"><div class="label">Показы / клики</div><div class="value">20 523 / 677</div></div></div>
+                <div class="card dark"><div class="metric"><div class="label">Конверсия</div><div class="value">7,5%</div><div class="delta">в корзину: 51</div></div></div>
+                <div class="card"><div class="metric"><div class="label">DRR (атриб.)</div><div class="value">39,7%</div><div class="delta">нормально для старта без отзывов</div></div></div>
+              </div>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="tag">Вывод</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>РК даёт трафик качественно (CTR 3,3%, CPC 3,3 ₽).</span></div>
+                    <div class="li"><span class="dot"></span><span>Доля расходов высокая (DRR 39,7%) из‑за маленького числа заказов/отзывов.</span></div>
+                    <div class="li"><span class="dot"></span><span>После базы отзывов — целим <b>DRR ≤ 12–15%</b>.</span></div>
+                  </div>
+                </div>
+                <div class="card dark">
+                  <div class="tag">Что делаем в РК</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Разделяем кампании: бренд / категорийка / конкурентка / авто.</span></div>
+                    <div class="li"><span class="dot"></span><span>Минусуем мусор, фиксируем ставки под целевой CPC.</span></div>
+                    <div class="li"><span class="dot"></span><span>Оставляем только прибыльные связки после роста конверсии.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">ЁМКОСТЬ НИШИ / ТРЕНД</div>
+              <h2>Категория “усилители автомобильные” — спрос и сезонность (по MPStats)</h2>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="tag">Что показывают графики</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Стабильная выручка в категории по году + пики на события.</span></div>
+                    <div class="li"><span class="dot"></span><span>Прогноз/тренд по категории — <b>рост</b>.</span></div>
+                    <div class="li"><span class="dot"></span><span>Рынок достаточно ёмкий, чтобы масштабировать линейку.</span></div>
+                  </div>
+                </div>
+
+                <div class="card dark">
+                  <div class="tag">Вставка ваших скринов</div>
+                  <p contenteditable="true" style="margin-top:10px">
+                    В GitHub можно положить картинки в /assets и вставить их на слайд.
+                    Сейчас блок-заглушка — чтобы быстро собрать и отправить Давиду.
+                  </p>
+                  <div class="card" style="margin-top:12px">
+                    <div class="metric">
+                      <div class="label">assets/market_01.png</div>
+                      <div class="delta">assets/forecast_01.png • assets/seasonality_01.png</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="tag">Ключевая мысль для инвестора</div>
+                <p contenteditable="true" style="margin-top:10px">
+                  Рост делаем не “рекламой в потолок”, а через связку: отзывы → конверсия → низкий DRR → стабильное наличие → расширение линейки.
+                </p>
+              </div>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 7 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">ДОРОЖНАЯ КАРТА</div>
+              <h2>План 60–90 дней</h2>
+
+              <div class="row three">
+                <div class="card">
+                  <div class="tag">0–30 дней</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Набор отзывов на Storm/Gale</span></div>
+                    <div class="li"><span class="dot"></span><span>Докрутка карточек / инфографики / УТП</span></div>
+                    <div class="li"><span class="dot"></span><span>РК с лимитами DRR, чистка запросов</span></div>
+                  </div>
+                </div>
+
+                <div class="card dark">
+                  <div class="tag">30–60 дней</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Поддержка наличия (без out‑of‑stock)</span></div>
+                    <div class="li"><span class="dot"></span><span>Рост заказов при том же трафике за счет конверсии</span></div>
+                    <div class="li"><span class="dot"></span><span>Масштабирование РК на прибыльных связках</span></div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="tag">60–90 дней</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Вывод новинок (провода/саб/5‑кан/колонки)</span></div>
+                    <div class="li"><span class="dot"></span><span>Рост среднего чека + кросс‑продажи</span></div>
+                    <div class="li"><span class="dot"></span><span>Стабилизация экономики (вклад +, DRR ≤ 15%)</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card dark">
+                <div class="tag">Линейка (roadmap)</div>
+                <table class="table" style="margin-top:10px">
+                  <thead>
+                    <tr><th>Категория</th><th>Задача</th><th>Зачем</th><th>Статус</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Провода</td><td contenteditable="true">быстрый оборот</td><td>вход в бренд</td><td contenteditable="true">план</td></tr>
+                    <tr><td>Сабвуфер</td><td contenteditable="true">апсейл</td><td>рост среднего чека</td><td contenteditable="true">план</td></tr>
+                    <tr><td>Усилитель 5‑канальный</td><td contenteditable="true">флагман</td><td>маржа/позиционирование</td><td contenteditable="true">план</td></tr>
+                    <tr><td>Колонки</td><td contenteditable="true">экосистема</td><td>кросс‑продажи</td><td contenteditable="true">план</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 8 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">ИНВЕСТИЦИЯ / ЗАКАЗ ТОВАРА</div>
+              <h2>Сколько заказывать и сколько денег нужно (базовый сценарий)</h2>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="tag">Партия товара</div>
+                  <table class="table" style="margin-top:10px">
+                    <thead>
+                      <tr><th>SKU</th><th>Кол-во</th><th>Себес/шт</th><th>Сумма</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Storm</td><td contenteditable="true">300</td><td>2 900 ₽</td><td contenteditable="true">870 000 ₽</td></tr>
+                      <tr><td>Gale</td><td contenteditable="true">200</td><td>2 300 ₽</td><td contenteditable="true">460 000 ₽</td></tr>
+                      <tr><td><b>Итого</b></td><td>—</td><td>—</td><td contenteditable="true"><b>1 330 000 ₽</b></td></tr>
+                    </tbody>
+                  </table>
+                  <p style="margin-top:10px" contenteditable="true">
+                    Логика: держим наличие на 45–60 дней, чтобы не упереться в остатки при росте конверсии/органики.
+                  </p>
+                </div>
+
+                <div class="card dark">
+                  <div class="tag">Разгон и оборотка (60–90 дней)</div>
+                  <table class="table" style="margin-top:10px">
+                    <thead>
+                      <tr><th>Статья</th><th>Сумма</th><th>Зачем</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Отзывы / промо механики</td><td contenteditable="true">250 000 ₽</td><td>ускорить доверие/конверсию</td></tr>
+                      <tr><td>Реклама (тест + масштаб)</td><td contenteditable="true">200 000 ₽</td><td>забрать трафик после базы</td></tr>
+                      <tr><td>Контент (фото/инфо/видео)</td><td contenteditable="true">90 000 ₽</td><td>упаковка “дорого”</td></tr>
+                      <tr><td>Оборотка / резерв</td><td contenteditable="true">630 000 ₽</td><td>логистика/разрывы</td></tr>
+                      <tr><td><b>Итого разгон</b></td><td contenteditable="true"><b>1 170 000 ₽</b></td><td>—</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="metric">
+                    <div class="label">Запрос инвестиций (итого)</div>
+                    <div class="value" contenteditable="true">2 500 000 ₽</div>
+                    <div class="delta">товар + разгон + резерв</div>
+                  </div>
+                </div>
+                <div class="card dark">
+                  <div class="tag">Важно</div>
+                  <p contenteditable="true" style="margin-top:10px">
+                    Можно сделать минимальный вход (≈1,8 млн ₽), но выше риск out‑of‑stock и медленнее рост.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+        <!-- SLIDE 9 -->
+        <section class="slide">
+          <div class="frame">
+            <div class="content">
+              <div class="kicker">СДЕЛКА / KPI / ПРОЗРАЧНОСТЬ</div>
+              <h2>Формат инвестиций и контроль</h2>
+
+              <div class="row two">
+                <div class="card">
+                  <div class="tag">Формат</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span><b>Конвертируемый займ</b> (быстро/просто)</span></div>
+                    <div class="li"><span class="dot"></span><span>или <b>доля</b> (по согласованной оценке)</span></div>
+                    <div class="li"><span class="dot"></span><span>Условия можно привязать к <b>KPI</b> (отзывы/оборот/маржа/DRR)</span></div>
+                  </div>
+                </div>
+
+                <div class="card dark">
+                  <div class="tag">Отчетность инвестору</div>
+                  <div class="list" style="margin-top:10px">
+                    <div class="li"><span class="dot"></span><span>Еженедельный отчет: продажи / DRR / остатки / заказы</span></div>
+                    <div class="li"><span class="dot"></span><span>План‑факт по расходам: реклама / логистика / контент</span></div>
+                    <div class="li"><span class="dot"></span><span>Доступ к скринам/дашборду (по договоренности)</span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="tag">KPI на 60–90 дней (черновик)</div>
+                <div class="row three" style="margin-top:12px">
+                  <div class="card dark"><div class="metric"><div class="label">Отзывы</div><div class="value" contenteditable="true">30–50 / SKU</div></div></div>
+                  <div class="card dark"><div class="metric"><div class="label">DRR после базы</div><div class="value" contenteditable="true">≤ 12–15%</div></div></div>
+                  <div class="card dark"><div class="metric"><div class="label">Наличие</div><div class="value" contenteditable="true">45–60 дней</div></div></div>
+                </div>
+              </div>
+
+              <div class="card dark">
+                <div class="tag">Контакты</div>
+                <p style="margin-top:10px" contenteditable="true">
+                  Сергей / Алисия • Telegram: @… • Email: …
+                </p>
+              </div>
+            </div>
+            <div class="wm"><span>🦊 SUNFOX</span><small>signature</small></div>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="controls">
+        <button class="btn secondary" id="prev">←</button>
+        <div class="counter"><span id="count">1 / 9</span> • <span class="muted">стрелки ← → • пробел • колёсико</span></div>
+        <button class="btn" id="next">→</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.getElementById('slides');
+    const sections = Array.from(document.querySelectorAll('section.slide'));
+    const nav = document.getElementById('nav');
+    const count = document.getElementById('count');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+
+    let i = 0;
+
+    function renderNav(){
+      nav.innerHTML = '';
+      sections.forEach((_, idx)=>{
+        const b = document.createElement('button');
+        b.title = `Слайд ${idx+1}`;
+        if(idx===i) b.classList.add('active');
+        b.addEventListener('click', ()=>go(idx));
+        nav.appendChild(b);
+      })
+      count.textContent = `${i+1} / ${sections.length}`;
+    }
+
+    function go(idx){
+      i = Math.max(0, Math.min(sections.length-1, idx));
+      slides.style.transform = `translateX(${-i*100}%)`;
+      renderNav();
+    }
+
+    function nextSlide(){ go(i+1); }
+    function prevSlide(){ go(i-1); }
+
+    next.addEventListener('click', nextSlide);
+    prev.addEventListener('click', prevSlide);
+
+    // Wheel = slide
+    let wheelLock = false;
+    window.addEventListener('wheel', (e)=>{
+      if (window.matchMedia('(max-width: 980px)').matches) return;
+      if(wheelLock) return;
+      wheelLock = true;
+      setTimeout(()=>wheelLock=false, 300);
+      if(e.deltaY>0) nextSlide(); else prevSlide();
+    }, {passive:true});
+
+    // Keyboard
+    window.addEventListener('keydown', (e)=>{
+      if (window.matchMedia('(max-width: 980px)').matches) return;
+      if(e.key==='ArrowRight' || e.key===' '){ nextSlide(); }
+      if(e.key==='ArrowLeft'){ prevSlide(); }
+    });
+
+    // Print
+    document.getElementById('btnPrint').addEventListener('click', ()=>window.print());
+
+    // Copy teaser
+    document.getElementById('btnCopy').addEventListener('click', async ()=>{
+      const teaser =
+`Давид, привет. Мы запустили BLACK TIGER AUDIO (автозвук) на WB/Ozon. Сейчас 2 SKU усилителей (Storm/Gale), стадия — набор отзывов + докрутка экономики/рекламы. Уже есть продажи: WB за 18 дней — 11 шт / 34 652 ₽ (Storm 10 шт, Gale 1 шт). Ozon за неделю: 3 заказа / 3 выкупа на 19 599 ₽; тест РК 8–14 дек: расход 2 263,54 ₽, продажи 5 700 ₽, CTR 3,3%, CPC 3,3 ₽. Дальше расширяем линейку: провода, саб, 5‑канальник, колонки. Нужна инвестиция ~2,5 млн ₽ на партию товара + разгон (отзывы/реклама/контент/оборотка). Скину one‑pager и скрины, созвон на 30 минут?`;
+      try{
+        await navigator.clipboard.writeText(teaser);
+        alert('Тизер скопирован в буфер обмена ✅');
+      }catch(err){
+        prompt('Скопируй вручную:', teaser);
+      }
+    });
+
+    renderNav();
+    go(0);
+  </script>
+</body>
+</html>
