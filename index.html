@@ -59,7 +59,19 @@
       display:flex; align-items:center; gap:10px;
       min-width: 280px;
     }
-    .brand .name{
+    
+    .brand .logo{
+      width: 34px; height:34px;
+      display:grid; place-items:center;
+      border-radius: 10px;
+      background: rgba(215,179,90,.10);
+      border: 1px solid rgba(215,179,90,.22);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      font-size: 18px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+.brand .name{
       font-weight: 800;
       letter-spacing:.5px;
       line-height:1.05;
@@ -281,16 +293,17 @@
 
     /* Footer controls */
     .controls{
-      position:absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 18px;
+      position:fixed;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap: 10px;
-      z-index: 20;
-      pointer-events:none;
+      z-index: 999;
+      pointer-events:auto;
+      padding: 0;
     }
     .controls > *{pointer-events:auto}
     .counter{
@@ -362,15 +375,7 @@
   <div class="app">
     <header>
       <div class="brand">
-        <!-- Replace this SVG with your real fox logo if you want -->
-        <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true">
-          <path fill="rgba(215,179,90,.22)" d="M9 21l9-11 10 10 4 8-6 6-11-13-6 0z"/>
-          <path fill="rgba(215,179,90,.22)" d="M55 21l-9-11-10 10-4 8 6 6 11-13 6 0z"/>
-          <path fill="rgba(215,179,90,.82)" d="M32 12c-9 0-17 9-17 20 0 14 10 22 17 22s17-8 17-22c0-11-8-20-17-20zm0 9c4 0 7 3 7 7 0 2-1 4-2 5 2 1 3 3 3 5 0 4-4 7-8 7s-8-3-8-7c0-2 1-4 3-5-1-1-2-3-2-5 0-4 3-7 7-7z"/>
-          <circle cx="26" cy="30" r="2" fill="#0b0f14"/>
-          <circle cx="38" cy="30" r="2" fill="#0b0f14"/>
-          <path d="M32 34c-3 0-4 2-4 3 0 3 2 5 4 5s4-2 4-5c0-1-1-3-4-3z" fill="#0b0f14"/>
-        </svg>
+        <div class="logo" aria-hidden="true">🦊</div>
         <div>
           <div class="name">BLACK TIGER AUDIO</div>
           <div class="sub">Investor one‑pager • WB + Ozon • стадия: набор отзывов</div>
@@ -942,11 +947,39 @@
     // Keyboard
     window.addEventListener('keydown', (e)=>{
       if (window.matchMedia('(max-width: 980px)').matches) return;
-      if(e.key==='ArrowRight' || e.key===' '){ nextSlide(); }
+      if(e.key==='ArrowRight' || e.key===' '){ e.preventDefault(); nextSlide(); }
       if(e.key==='ArrowLeft'){ prevSlide(); }
     });
 
-    // Print
+    
+    // Mobile: tap left/right to navigate (ignore UI clicks)
+    const interactiveSel = 'button, a, input, textarea, [contenteditable="true"], .nav button';
+    document.addEventListener('click', (e)=>{
+      if(e.target && e.target.closest(interactiveSel)) return;
+      const x = (e.clientX ?? 0);
+      const w = window.innerWidth || 1;
+      if (w < 980){
+        if (x > w*0.66) nextSlide();
+        else if (x < w*0.34) prevSlide();
+      }
+    });
+
+    // Mobile: swipe
+    let touchX = null;
+    window.addEventListener('touchstart', (e)=>{
+      if(!e.touches || !e.touches.length) return;
+      touchX = e.touches[0].clientX;
+    }, {passive:true});
+    window.addEventListener('touchend', (e)=>{
+      if(touchX === null) return;
+      const endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : touchX;
+      const dx = endX - touchX;
+      touchX = null;
+      const threshold = 45;
+      if (Math.abs(dx) < threshold) return;
+      if (dx < 0) nextSlide(); else prevSlide();
+    }, {passive:true});
+// Print
     document.getElementById('btnPrint').addEventListener('click', ()=>window.print());
     // Copy teaser
     document.getElementById('btnCopy').addEventListener('click', async ()=>{
