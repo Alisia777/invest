@@ -111,7 +111,7 @@
       position:relative;
       flex:1;
       min-height:0;          /* IMPORTANT for flex children to size properly */
-      padding:18px 0 0;
+      padding:28px 0 0;
       overflow:hidden;
       display:flex;
       align-items:stretch;
@@ -273,7 +273,7 @@
     .nav{
       position:absolute;
       right: 14px;
-      top: 86px;
+      top: 98px;
       display:flex;
       flex-direction:column;
       gap:10px;
@@ -391,8 +391,7 @@
       <div class="pill">
         <span>Обновление: <b contenteditable="true">14.12.2025</b></span>
         <button class="btn secondary" id="btnPrint" title="Сохранить как PDF через печать браузера">PDF</button>
-        <button class="btn" id="btnCopy" title="Скопировать тезисы для Telegram">Скопировать тизер</button>
-      </div>
+</div>
     </header>
 
     <div class="deck">
@@ -870,14 +869,7 @@
 <a href="assets/shot_08.png" target="_blank" rel="noopener"><img src="assets/shot_08.png" alt="screenshot 8"></a>
                 </div>
               </div>
-
-              <div class="card">
-                <div class="tag">Примечание</div>
-                <p style="margin-top:10px" contenteditable="true">
-                  Если нужно — заменим эти скрины на “вырезки” без лишнего и с подсветкой ключевых цифр.
-                </p>
-              </div>
-            </div>
+</div>
 </div>
         </section>
 
@@ -904,6 +896,15 @@
     const count = document.getElementById('count');
     const prev = document.getElementById('prev');
     const next = document.getElementById('next');
+
+    const btnPrint = document.getElementById('btnPrint');
+    if(btnPrint){
+      btnPrint.addEventListener('click', function(e){
+        e.preventDefault();
+        window.print();
+      });
+    }
+
 
     if(!slidesWrap || !sections.length) return;
 
