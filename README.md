@@ -17,4 +17,4 @@
 Открой сайт → кнопка **PDF** (вверху) → “Сохранить как PDF”.
 
 
-> FIX: CSS patched for GitHub Pages viewport height.
+> FIX2: layout switched to flex (robust for Pages).
